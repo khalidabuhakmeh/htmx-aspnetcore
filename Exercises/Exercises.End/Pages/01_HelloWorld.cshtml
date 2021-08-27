@@ -1,0 +1,53 @@
+@page "/examples/01-helloworld"
+@using Exercises.Models
+@model Exercises.Pages.HelloWorld
+@{ 
+    ViewBag.Title = "Hello World";
+    ViewBag.Home = true;
+    ViewBag.Next = "02_Counter";
+}
+
+<markdown>
+    # 1. Hello World!
+    
+    HTMX allows you to decorate any HTML element with attributes that will trigger an HTTP request. Then, once the page receives a response from the server, HTMX will use the HTML response to replace a part of the existing page. 
+    
+    As a starting point, let's replace the **Change Me!** text below with **Hello, World!**.
+    
+    **Hint:** You'll need the attributes of `hx-get` and `hx-target`. You can
+    also leave the value of `hx-get` empty, which will get this page, or use `Url.Page("01_HelloWorld")` to generate a link.
+    
+    ---
+    
+</markdown>
+
+<div class="card m-5 p-5 ms-0 text-center">
+    <h2 class="fs-1 mb-4" id="target">
+        Change Me!
+    </h2>
+    
+    <!-- add htmx attributes to button -->
+    <!-- will get this page -->
+    <button class="btn btn-primary btn-lg px-4"
+            hx-get=""
+            hx-target="#target"
+    >
+        Click Me
+    </button>
+</div>
+
+
+<markdown>
+    ---
+
+    **Bonus:** You'll notice the `PageModel` of `HelloWorld` is using HTMX.NET to determine whether the incoming request is an HTMX request.
+        
+    ```c#
+    return Request.IsHtmx()
+    ? Content("<span>Hello, World!</span>", "text/html")
+    : Page();
+    ```
+    
+    This is a common pattern you'll see through out this project.
+</markdown>
+

@@ -1,0 +1,42 @@
+@model Exercises.Pages.Polling
+@{ ArgumentNullException.ThrowIfNull(Model); }
+
+<div class="d-flex align-content-start justify-content-around flex-wrap">
+    @foreach (var co in Model.Companies)
+    {
+        <div class="card m-2 text-center flex-fill">
+            <div class="card-header">
+                <span>@co.Name </span>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fab fa-@co.Icon fa-5x fa-sm"></i>
+                </h5>
+                <div class="card-text">
+                    @if (co.IsUp)
+                    {
+                        <div class="text-success fa-2x">
+                            <i class="fa fa-arrow-up"></i>
+                            <span>@co.CurrentPrice.ToString("$#.00")</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-danger fa-2x">
+                            <span class="icon">
+                                <i class="fa fa-arrow-down"></i>
+                            </span>
+                            <span>@co.CurrentPrice.ToString("$#.00")</span>
+                        </div>
+                    }
+                </div>
+                <span class="text-black-50">
+                    Opened @@ @co.OpeningPrice.ToString("$#.00")
+                </span>
+            </div>
+            <div class="card-footer text-muted">
+                @DateTime.Now.ToLongTimeString()
+            </div>
+        </div>
+    }
+</div>

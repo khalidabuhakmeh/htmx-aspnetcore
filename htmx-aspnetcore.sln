@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Exercises", "Exercises", "{91212099-7C38-4BF6-8DB4-69A6E32BBE81}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JetSwagStore", "JetSwagStore", "{23957457-27D1-43B8-B311-0B8746A02922}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercises.End", "Exercises\Exercises.End\Exercises.End.csproj", "{9F221DED-210C-4907-BE8A-7D0D489F9F70}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9F221DED-210C-4907-BE8A-7D0D489F9F70} = {91212099-7C38-4BF6-8DB4-69A6E32BBE81}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F221DED-210C-4907-BE8A-7D0D489F9F70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F221DED-210C-4907-BE8A-7D0D489F9F70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F221DED-210C-4907-BE8A-7D0D489F9F70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F221DED-210C-4907-BE8A-7D0D489F9F70}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

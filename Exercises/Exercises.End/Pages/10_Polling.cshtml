@@ -1,0 +1,25 @@
+@page "/examples/10-long-polling"
+@model Exercises.Pages.Polling
+
+@{
+    ViewBag.Title = "Long Polling";
+    ViewBag.Previous = "09_FormValidation";
+    ViewBag.Next = "11_ServerEvents";
+}
+
+<markdown>
+    # 10. Client Long Polling
+
+    Polling can be a valuable technique to keep clients informed of changes to critical data. Instead of having your users sit there refreshing a page, the page can periodically call the server to retrieve information. This technique becomes incredibly potent when the response is cached, allowing you to update data once, cache it on the first request, and have all subsequent clients benefit from the result.
+    
+    HTMX allows you to provide an `hx-trigger` based on a time interval using the value of `every 2s`. Thus, the page will call the server every 2 seconds to retrieve updates. You may have already noticed the values changing on this page.
+    
+    ---
+</markdown>
+
+<div class="container"
+     hx-get="@Url.Page("10_Polling")"
+     hx-trigger="every 2s"
+     hx-swap="innerHtml">
+    @await Html.PartialAsync("_Stonks")
+</div>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        @ViewData["Title"] - HTMX for ASP.NET Core Developers Samples
+    </title>
+    <link rel="stylesheet" href="~/css/bootstrap.css">
+    <link rel="stylesheet" href="~/css/fontawesome/all.min.css">
+    @await RenderSectionAsync("head", false)
+</head>
+
+<body>
+<div class="col-lg-8 mx-auto p-3 py-md-5">
+    <header class="d-flex align-items-center pb-3 mb-5 border-bottom ">
+        <a asp-page="Index" class="d-flex align-items-center text-dark text-decoration-none">
+            <img src="~/img/jetbrains.png" alt="jetbrains logo" width="40" class="me-2" />
+            <span class="fs-4">Getting Started with HTMX</span>
+        </a>
+    </header>
+
+    <main class="col-8">
+        @RenderBody()
+        @await Html.PartialAsync("Pagination")
+    </main>
+
+    <footer class="pt-5 my-5 text-muted border-top">
+        Created by the JetBrains team &middot; &copy; 2021
+    </footer>
+</div>
+
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/htmx.min.js"></script>
+<script src="~/js/_hyperscript.min.js"></script>
+@await RenderSectionAsync("end", false)
+</body>
+</html>
+

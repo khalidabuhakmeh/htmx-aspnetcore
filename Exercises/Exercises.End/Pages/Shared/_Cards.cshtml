@@ -1,0 +1,30 @@
+@model Exercises.Pages.Scroll
+@{
+    ArgumentNullException.ThrowIfNull(Model);
+    var end = Model.Cursor + 19;
+}
+
+@for (var i = Model.Cursor; i <= end; i++)
+{
+    <div
+        class="card mb-4 ms-1" aria-hidden="true"
+        @if (i == end)
+        {
+            // conditional attributes
+            <text>
+                hx-get="@Url.Page("05_Scroll", new {cursor = end + 1})"
+                hx-trigger="revealed"
+                hx-swap="afterend"
+            </text>
+        }>
+        <img alt="random image" 
+             width="200"
+             height="150"
+             src="https://picsum.photos/200/150?cache=@DateTime.Now.Ticks" class="card-img-top"/>
+        <div class="card-body bg-dark text-white">
+            <div class="h5 card-title text-center ">
+                Card #@i
+            </div>
+        </div>
+    </div>
+}
