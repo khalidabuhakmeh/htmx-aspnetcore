@@ -18,6 +18,7 @@
 
     <ItemGroup>
       <Folder Include="wwwroot\img" />
+      <Folder Include="wwwroot\js\extra" />
     </ItemGroup>
 
 </Project>

@@ -1,0 +1,32 @@
+@model Exercises.Pages.OutOfBand
+@{ ArgumentNullException.ThrowIfNull(Model); }
+
+@if (Model.RenderCartOutOfBand)
+{
+    <a id="cartNavbar" hx-swap-oob="true" class="nav-link ms-10" aria-current="page" href="#">
+        <i class="fa fa-shopping-cart"></i>
+        Cart
+        <span class="badge bg-secondary">@Model.TotalItemsInCart</span>
+    </a>
+}
+<div id="shoppingItem" class="d-flex justify-content-center align-items-center container px-2 mt-4">
+    <div class="card">
+        <div class="top d-flex flex-row align-items-center bg-primary">
+            <h6 class="mb-0 mr-2">Organics by LaMana</h6> <i class="fa fa-opencart"></i>
+        </div>
+        <div class="middle">
+            <img alt="pineapple" src="https://i.imgur.com/b4nm7pc.png" width="300" class="mt-3">
+            <h5>Pineapple Green Packham</h5> <span>Each - approx 1.2KG</span>
+        </div>
+        <div class="bottom d-flex flex-row justify-content-center">
+            <form hx-post hx-page="14_OutOfBand" hx-page-handler="AddToCart" hx-swap="outerHTML" hx-target="#shoppingItem">
+                <div class="input-group mb-3">
+                    <input id="count" type="number" min="0" max="100" class="form-control" name="count" value="@Model.TotalItemsInCart">
+                    <button type="submit" class="btn btn-success btn-sm add">
+                        Add For <b>$1.75</b>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
