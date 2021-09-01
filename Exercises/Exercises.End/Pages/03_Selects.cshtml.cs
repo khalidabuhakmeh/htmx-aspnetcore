@@ -27,7 +27,8 @@ namespace Exercises.Pages
                     .ToList();
                 
                 items.Insert(0, new SelectListItem("Choose an option", "") {
-                    Disabled = true
+                    Disabled = true,
+                    Selected = true
                 });
                 
                 return items;

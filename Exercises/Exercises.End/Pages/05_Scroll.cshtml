@@ -31,7 +31,7 @@
                 hx-swap="afterend"
             </text>
         }>
-        @* ReSharper restore Html.TagNotClosed *@
+    @* ReSharper restore Html.TagNotClosed *@
     ```
     
     Remember, this will be triggered when this element is visible.
@@ -45,11 +45,11 @@
 
 <div class="alert alert-warning fs-4">
     <div>
-        <i class="fa fa-exclamation-triangle"></i> Warning: Will Scroll For...ever
+        <i class="fa fa-exclamation-triangle"></i> Warning: content will scroll forever.
     </div>
 </div>
 
-<div id="#cards" class="d-flex justify-content-center align-content-center flex-wrap mt-5">
+<div id="#cards" class="d-flex justify-content-center align-content-around flex-wrap mt-5">
     @await Html.PartialAsync("_Cards")
 </div>
 

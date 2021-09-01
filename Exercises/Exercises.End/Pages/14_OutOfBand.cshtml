@@ -29,18 +29,13 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
-                <div class="navbar-nav ml-auto">
-                    <!-- will be replaced by HTMX Out-of-band swaps -->
-                    <a id="cartNavbar" class="nav-link ms-10" aria-current="page" href="#">
-                        <i class="fa fa-shopping-cart"></i>
-                        Cart
-                        <span class="badge bg-secondary">@Model.TotalItemsInCart</span>
-                    </a>
-                </div>
+            <div class="navbar-nav ml-auto">
+                <!-- will be replaced by HTMX Out-of-band swaps -->
+                <a id="cartNavbar" class="nav-link ms-10" aria-current="page" href="#">
+                    <i class="fa fa-shopping-cart"></i>
+                    Cart
+                    <span class="badge bg-secondary">@Model.TotalItemsInCart</span>
+                </a>
             </div>
         </div>
     </nav>
