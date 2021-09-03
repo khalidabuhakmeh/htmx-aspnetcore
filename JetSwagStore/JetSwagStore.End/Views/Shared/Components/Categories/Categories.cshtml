@@ -1,0 +1,26 @@
+@model JetSwagStore.Models.Components.Categories.CategoriesViewModel
+
+<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <li>
+        <a class="dropdown-item" asp-controller="Home" asp-action="Index">
+            All Products
+        </a>
+    </li>
+    <li>
+        <hr class="dropdown-divider"/>
+    </li>
+    @foreach (var category in Model.Results)
+    {
+        <li>
+            <a class="dropdown-item"
+               asp-controller="Home"
+               asp-action="Index"
+               asp-route-category="@category.Name">
+                @category.Name 
+                <span class="badge bg-dark text-white ms-1 rounded-pill float-end">
+                    @category.TotalProductCount
+                </span>
+            </a>
+        </li>        
+    }
+</ul>

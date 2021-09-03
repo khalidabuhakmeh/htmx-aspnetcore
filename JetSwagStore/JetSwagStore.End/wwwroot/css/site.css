@@ -1,0 +1,20 @@
+.jetbrains {
+    background-image: url("../img/header.jpg");
+    background-size: cover;
+    position: relative;
+}
+
+.form-control:focus {
+    border-color: #ff80ff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 100, 255, 0.5);
+}
+
+.htmx-indicator{
+    display:none;
+}
+.htmx-request .htmx-indicator{
+    display:inline;
+}
+.htmx-request.htmx-indicator{
+    display:inline;
+}

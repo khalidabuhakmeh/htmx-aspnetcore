@@ -1,0 +1,9 @@
+@model JetSwagStore.Models.Home.IndexViewModel
+@{
+    System.Diagnostics.Debug.Assert(Model != null, nameof(Model) + " != null");
+}
+
+@foreach (var product in Model.Results)
+{
+    @await Html.PartialAsync("_Product", product)
+}

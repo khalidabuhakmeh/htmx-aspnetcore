@@ -1,0 +1,82 @@
+@using JetSwagStore.Models.Home
+@model JetSwagStore.Models.Home.ProductViewModel
+@{
+    System.Diagnostics.Debug.Assert(Model != null, nameof(Model) + " != null");
+
+    CartViewModel cart = ViewBag.CurrentCart;
+    var id = $"shopItem-{Model.Info.Id}";
+}
+@if (Model.ShouldRenderCartButton)
+{
+    @await Html.PartialAsync("_CartButton")
+}
+<div id="@id" class="col mb-5">
+    <div class="card h-100">
+        @if (Model.IsOnSale)
+        {
+            <!-- Sale badge-->
+            <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                <i class="fa fa-fire"></i>
+                Sale
+            </div>
+        }
+        <div id="@id-indicator" class="htmx-indicator badge bg-success text-white position-absolute" style="top: 0.5rem; right: 0.5rem;">
+            <i class="fa fa-circle-notch fa-spin"></i> Updating
+        </div>
+        <!-- Product image-->
+        <img class="card-img-top img-responsive img-fluid" width="450" src="~/img/@Model.Info.ImageUrl" alt="@Model.Info.Name"/>
+        <!-- Product details-->
+        <div class="card-body p-4">
+            <div class="text-center">
+                <!-- Product name-->
+                <h5 class="fw-bolder">@Model.Info.Name</h5>
+                <!-- Product price-->
+                @Model.PriceDisplay
+            </div>
+        </div>
+        <!-- Product actions-->
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                @if (Model.HasOptions)
+                {
+                    <a class="btn btn-outline-dark mt-auto" href="#">View options</a>
+                }
+                else
+                {
+                    <form hx-post
+                          hx-action="Update"
+                          hx-controller="Cart"
+                          hx-target="#@id"
+                          hx-indicator="#@id-indicator"
+                          hx-swap="outerHTML">
+                        <input type="hidden" name="ProductId" value="@Model.Info.Id"/>
+                        @if (cart.HasProduct(Model.Info.Id) is {} item)
+                        {
+                            <div class="input-group mt-auto">
+                                <input type="number" min="0" max="100" class="form-control" name="Quantity" value="@item.Quantity">
+                                <button
+                                    type="submit"
+                                    class="btn btn-outline-dark btn-sm">
+                                    Update
+                                </button>
+                                <button type="submit"
+                                        name="Remove"
+                                        value="true"
+                                        class="btn btn-outline-danger btn-sm">
+                                    <i class="fa fa-trash">
+                                        <span class="visually-hidden">Remove</span>
+                                    </i>
+                                </button>
+                            </div>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-outline-dark mt-auto" href="#">Add to cart</button>
+                            <input type="hidden" class="form-control" name="Quantity" value="1">
+                        }
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+﻿@using JetSwagStore.Models.Home
+@model JetSwagStore.Models.Home.IndexViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+    CartViewModel cart = ViewBag.CurrentCart;
+}
+
+@section Header
+{
+    <header class="bg-dark jetbrains py-2">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">JetBrains Swag Store</h1>
+                <p class="lead fw-normal mb-0">
+                    Adding More Beauty To Your Brains
+                </p>
+            </div>
+        </div>
+    </header>
+}
+
+<div class="row">
+    <form asp-action="Index" asp-controller="Home" method="GET">
+        <div class="input-group mb-5">
+            <span class="input-group-text" id="search-addon">
+                <i class="fa fa-search"></i>
+            </span>
+            <input type="text"
+                   id="query"
+                   asp-for="Query"
+                   hx-get
+                   hx-action="index"
+                   hx-controller="home"
+                   hx-target="#results"
+                   hx-trigger="keyup changed delay:250ms"
+                   hx-indicator="#loading"
+                   autocomplete="off"
+                   autofocus="autofocus"
+                   placeholder="Search"
+                   class="form-control"
+                   aria-label="Username"
+                   aria-describedby="search-addon">
+            <input type="hidden" asp-for="Category"/>
+        </div>
+    </form>
+</div>
+
+<div class="row mb-2">
+    <h2>
+        <i id="loading" class="fa fa-tshirt"></i> @Model.CategoryDisplay
+        @if (Model.HasQuery)
+        {
+            <span class="text-black-50 fst-italic">Searched:"@Model.Query"</span>
+        }
+    </h2>
+</div>
+
+<div id="results" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
+@await Html.PartialAsync("_Products")
+</div>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Htmx;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Westwind.AspNetCore.Markdown.Utilities;
@@ -44,7 +45,7 @@ namespace Exercises.Pages
             Response.Htmx(h => {
                 // we want to push the current url 
                 // into the history
-                h.Push(Request.GetUrl());
+                h.Push(Request.GetEncodedUrl());
             });
 
             return Partial("_Results", this);

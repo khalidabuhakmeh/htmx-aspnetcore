@@ -10,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 // add dependencies to services collection
 builder.Services.AddHttpClient();
 builder.Services.AddRazorPages(o => {
+    // this is to make demos easier
+    // don't do this in production
     o.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
 }).AddRazorRuntimeCompilation();
 
