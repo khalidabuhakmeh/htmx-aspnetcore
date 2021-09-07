@@ -5,6 +5,7 @@ using JetSwagStore.Models.Cart;
 using JetSwagStore.Models.Extensions;
 using JetSwagStore.Models.Home;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
 
 namespace JetSwagStore.Controllers;
@@ -20,23 +21,19 @@ public class CartController : Controller
         this.db = db;
         this.currentShoppingCart = currentShoppingCart;
     }
-    
-    // GET
-    public IActionResult Show()
-    {
-        return View();
-    }
 
     [HttpPost, Route("")]
     public async Task<IActionResult> Update([FromForm] UpdateCartRequest input)
     {
         var product = await db.Products
-            .Include(p => p.Options.Where(o => o.Id == input.ProductOptionId))
+            .Include(p => p.Options)
+            .Include(p => p.Categories)
             .FirstOrDefaultAsync(p => p.Id == input.ProductId);
 
-        var option = product?.Options.FirstOrDefault();
+        var option = product?.Options.FirstOrDefault(p => p.Id == input.ProductOptionId);
 
-        if (product is null) {
+        if (product is null)
+        {
             return BadRequest("Product or option was not found.");
         }
 
@@ -74,12 +71,24 @@ public class CartController : Controller
             await db.SaveChangesAsync();
         }
 
-        return Request.IsHtmx()
-            ? PartialView("_Product", new ProductViewModel {
+        if (!Request.IsHtmx())
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        // added via card or view options
+        return option is not null
+            ? PartialView("_ProductOptions", new ProductWithOptionsViewModel
+            {
+                Info = product,
+                ProductOptionId = option.Id,
+                ShouldRenderCartButton = true,
+                InstantlyShowModal = true
+            })
+            : PartialView("_Product", new ProductViewModel
+            {
                 Info = product,
                 ShouldRenderCartButton = true
-            })
-            : RedirectToAction("Index", "Home");
+            });
     }
 }
-

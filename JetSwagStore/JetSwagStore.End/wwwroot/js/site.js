@@ -10,3 +10,27 @@ document.body.addEventListener('htmx:configRequest', function(evt) {
         console.log(antiForgeryRequestToken);
     }    
 });
+
+function showModal() {
+    const backdrop = document.getElementById("modal-backdrop");
+    const modal = document.getElementById("modal");
+
+    setTimeout(() => {
+        modal.classList.add("show")
+        backdrop.classList.add("show")
+    }, 10);
+}
+
+function closeModal() {
+    const container = document.getElementById("product-modal-container");
+    const backdrop = document.getElementById("modal-backdrop");
+    const modal = document.getElementById("modal");
+
+    modal.classList.remove("show")
+    backdrop.classList.remove("show")
+
+    setTimeout(function() {
+        container.removeChild(backdrop)
+        container.removeChild(modal)
+    }, 200)
+}

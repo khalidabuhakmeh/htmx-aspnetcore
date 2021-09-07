@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using Htmx;
-using JetSwagStore.End.Models;
 using JetSwagStore.Models;
 using JetSwagStore.Models.Extensions;
 using JetSwagStore.Models.Home;

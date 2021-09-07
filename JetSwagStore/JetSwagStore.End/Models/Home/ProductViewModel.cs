@@ -6,12 +6,12 @@ namespace JetSwagStore.Models.Home;
 public class ProductViewModel
 {
     public Product Info { get; set; }
-
+    
     public bool IsOnSale => Info.DiscountPrice.HasValue;
     public bool HasOptions => Info.Options.Any();
     public bool ShouldRenderCartButton { get; set; }
 
-    public HtmlString PriceDisplay
+    public virtual HtmlString PriceDisplay
     {
         get
         {
@@ -30,5 +30,4 @@ public class ProductViewModel
                 : new HtmlString($"${Info.Price:###.00}");
         }
     }
-    
 }

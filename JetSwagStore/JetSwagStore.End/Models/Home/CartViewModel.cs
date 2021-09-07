@@ -12,6 +12,7 @@ public class CartViewModel
             ProductId = i.ProductId.GetValueOrDefault(),
             Name = i.Product?.Name ?? string.Empty,
             OptionName = i.Option?.Name,
+            OptionId = i.Option?.Id,
             TotalPrice = i.GetTotalPrice(),
             ImageUrl = i.Product?.ImageUrl ?? string.Empty
         }).ToList();
@@ -21,6 +22,8 @@ public class CartViewModel
     public IList<CartItemViewModel> Items { get; }
     public double TotalPrice => Items.Sum(c => c.TotalPrice);
     public CartItemViewModel? HasProduct(int productId) => Items.FirstOrDefault(i => i.ProductId == productId);
+    public CartItemViewModel? HasProductOption(int productId, int? optionId) => Items.FirstOrDefault(i => i.ProductId == productId && i.OptionId == optionId);
+    
     public bool IsHtmxOutOfBandSwap { get; set; }
 }
 
@@ -33,4 +36,5 @@ public class CartItemViewModel
     public string? OptionName { get; set; }
     public double TotalPrice { get; set; }
     public string ImageUrl { get; set; } = string.Empty;
+    public int? OptionId { get; set; }
 }

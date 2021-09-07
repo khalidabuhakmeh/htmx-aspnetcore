@@ -1,16 +1,13 @@
-@using JetSwagStore.Models.Home
 @model JetSwagStore.Models.Home.ProductViewModel
 @{
     System.Diagnostics.Debug.Assert(Model != null, nameof(Model) + " != null");
-
-    CartViewModel cart = ViewBag.CurrentCart;
     var id = $"shopItem-{Model.Info.Id}";
 }
 @if (Model.ShouldRenderCartButton)
 {
     @await Html.PartialAsync("_CartButton")
 }
-<div id="@id" class="col mb-5">
+<div id="@id" class="col mb-5" hx-swap-oob="true">
     <div class="card h-100">
         @if (Model.IsOnSale)
         {
@@ -37,9 +34,28 @@
         <!-- Product actions-->
         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
             <div class="text-center">
+                @{
+                    var item = Cart.HasProduct(Model.Info.Id);
+                    var isInCart = item is {};
+                }
                 @if (Model.HasOptions)
                 {
-                    <a class="btn btn-outline-dark mt-auto" href="#">View options</a>
+                    <a class="btn btn-outline-dark mt-auto position-relative"
+                       hx-get
+                       hx-action="Show"
+                       hx-controller="Products"
+                       hx-route-id="@Model.Info.Id"
+                       hx-target="#product-modal-container"
+                       _="on htmx:afterOnLoad call showModal()"
+                       href="#">
+                        View Options
+                        @if (isInCart)
+                        {
+                            <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                                <span class="visually-hidden">In Cart</span>
+                            </span>
+                        }
+                    </a>
                 }
                 else
                 {
@@ -50,7 +66,7 @@
                           hx-indicator="#@id-indicator"
                           hx-swap="outerHTML">
                         <input type="hidden" name="ProductId" value="@Model.Info.Id"/>
-                        @if (cart.HasProduct(Model.Info.Id) is {} item)
+                        @if (isInCart)
                         {
                             <div class="input-group mt-auto">
                                 <input type="number" min="0" max="100" class="form-control" name="Quantity" value="@item.Quantity">

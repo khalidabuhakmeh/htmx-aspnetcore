@@ -1,4 +1,4 @@
-namespace JetSwagStore.End.Models;
+namespace JetSwagStore.Models;
 
 public class ErrorViewModel
 {

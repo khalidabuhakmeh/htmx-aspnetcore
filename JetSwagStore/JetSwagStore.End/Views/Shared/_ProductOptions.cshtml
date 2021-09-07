@@ -1,0 +1,93 @@
+@model JetSwagStore.Models.Home.ProductWithOptionsViewModel
+@{
+    System.Diagnostics.Debug.Assert(Model != null, nameof(Model) + " != null");
+    var showModalCss = Model.InstantlyShowModal ? "show" : null;
+}
+@await Html.PartialAsync("_Product")
+<div id="modal-backdrop" class="modal-backdrop fade @showModalCss" style="display:block;"></div>
+<div id="modal" class="modal fade @showModalCss" tabindex="-1" style="display:block;">
+    <div id="modal-dialog" class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 position-relative">
+                        <div id="modal-indicator" class="htmx-indicator badge bg-success text-white position-absolute" style="top: 0.5rem; right: 1.5rem;">
+                            <i class="fa fa-circle-notch fa-spin"></i> Updating
+                        </div>
+                        <img src="~/img/@Model.Info.ImageUrl" alt="@Model.Info.Name" class="img-fluid w-100 rounded mb-3"/>
+                    </div>
+                    <div class="col-md-6">
+                        <form
+                            hx-post
+                            hx-action="Update"
+                            hx-controller="Cart"
+                            hx-target="#product-modal-container"
+                            hx-swap="innerHTML"
+                            hx-indicator="#modal-indicator">
+                            <h3 class="d-flex justify-content-between flex-sm-wrap">
+                                <span>@Model.Info.Name</span>
+                                <span class="badge bg-secondary">Price: @Model.PriceDisplay</span>
+                            </h3>
+                            <div class="mb-3 form-group">
+                                <label asp-for="ProductOptionId" class="mb-1"></label>
+                                <select asp-for="ProductOptionId"
+                                        asp-items="Model.Options" class="form-select"
+                                        hx-get
+                                        hx-action="Show"
+                                        hx-controller="Products"
+                                        hx-route-id="@Model.Info.Id"
+                                        hx-route-showModal="true"
+                                        hx-target="#product-modal-container"
+                                        hx-swap="innerHTML"
+                                        hx-indicator="#modal-indicator">
+                                </select>
+                            </div>
+                            @{
+                                var item = Cart.HasProductOption(Model.Info.Id, Model.ProductOptionId);
+                                var isInCart = item is {};
+                                var min = isInCart ? 0 : 1;
+                            }
+                            <div class="input-group my-3">
+                                <input type="number" min="@min" max="100" class="form-control" name="Quantity" value="@(item?.Quantity ?? 1)">
+                                <button
+                                    type="submit"
+                                    class="btn btn-outline-dark btn-sm">
+                                    @(isInCart ? "Update" : "Add To Cart")
+                                </button>
+                                @if (isInCart)
+                                {
+                                    <button type="submit"
+                                            name="Remove"
+                                            value="true"
+                                            class="btn btn-outline-danger btn-sm">
+                                        <i class="fa fa-trash">
+                                            <span class="visually-hidden">Remove</span>
+                                        </i>
+                                    </button>
+                                }
+                            </div>
+                            <div>
+                                <h5 class="text-black-50 fs-6">Description</h5>
+                                <p>@Model.Info.Description</p>
+                            </div>
+                            <hr/>
+                            <div>
+                                <h5 class="text-black-50 fs-6">Categories</h5>
+                                <ul>
+                                    @foreach (var category in Model.Info.Categories.OrderBy(c => c.Sort))
+                                    {
+                                        <li>@category.Name</li>
+                                    }
+                                </ul>
+                            </div>
+                            <input type="hidden" asp-for="ProductId"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

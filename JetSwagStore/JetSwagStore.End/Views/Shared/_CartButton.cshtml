@@ -1,11 +1,5 @@
-@using JetSwagStore.Models.Home
-
-@{
-    CartViewModel cart = ViewBag.CurrentCart;
-}
-
 <div id="cartButton" class="d-flex"
-      @if (cart.IsHtmxOutOfBandSwap)
+      @if (Cart.IsHtmxOutOfBandSwap)
       {
           <text>
               hx-swap-oob="true"
@@ -15,7 +9,7 @@
         <i class="fa fa-shopping-basket me-1"></i>
         Cart
         <span class="badge bg-dark text-white ms-1 rounded-pill">
-            @cart.TotalItems
+            @Cart.TotalItems
         </span>
     </button>
 </div>
