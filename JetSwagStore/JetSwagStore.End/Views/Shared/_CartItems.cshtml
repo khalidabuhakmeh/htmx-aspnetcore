@@ -1,0 +1,123 @@
+@model JetSwagStore.Models.Home.ProductViewModel
+@* Update The Product that was updated, along with cart *@
+@if (Model is not null)
+{
+    @await Html.PartialAsync("_Product", Model)
+}
+<div id="modal-backdrop" class="modal-backdrop show fade" style="display:block;"></div>
+<div id="modal" class="modal show fade" tabindex="-1" style="display:block;">
+    <div id="modal-dialog" class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            @if (Cart.HasItems)
+            {
+                <div class="modal-body">
+                    <h3 class="mb-4">
+                        <i class="fa fa-shopping-cart"></i> Shopping Cart
+                        <i id="modal-indicator" class="htmx-indicator fa fa-spinner fa-spin float-end"></i>
+                    </h3>
+                    <hr/>
+                    <table class="table table-responsive table-bordered table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th class="w-25"></th>
+                            <th class="w-25">Name</th>
+                            <th class="w-auto">Quantity</th>
+                            <th class="w-auto">Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var item in Cart.Items)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    <img width="100" class="img-thumbnail" src="~/img/@item.ImageUrl" alt="@item.Name"/>
+                                </td>
+                                <td>
+                                    <span class="fs-5"> @item.Name</span>
+                                    @if (item.OptionId.HasValue)
+                                    {
+                                        <p>
+                                            <span class="badge bg-dark text-white">@item.OptionName</span>
+                                        </p>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="input-group mt-auto">
+                                        @{ var quantityId = $"quantity-{item.ProductId}-{item.OptionId ?? 0}"; }
+                                        <input id="@quantityId" type="number" min="0" max="100" class="form-control" name="Quantity" value="@item.Quantity">
+                                        <button
+                                            type="submit"
+                                            class="btn btn-outline-dark btn-sm"
+                                            hx-put
+                                            hx-action="Update"
+                                            hx-controller="Cart"
+                                            hx-include="#@quantityId"
+                                            hx-vals='{ "ProductId" : "@item.ProductId", "ProductOptionId": "@item.OptionId" }'
+                                            hx-target="#product-modal-container"
+                                            hx-swap="innerHTML"
+                                            hx-indicator="#modal-indicator">
+                                            Update
+                                        </button>
+                                        <button type="submit"
+                                                name="Remove"
+                                                value="true"
+                                                hx-put
+                                                hx-action="Update"
+                                                hx-controller="Cart"
+                                                hx-vals='{ "ProductId" : "@item.ProductId", "ProductOptionId": "@item.OptionId", "Quantity" : "0" }'
+                                                hx-target="#product-modal-container"
+                                                hx-swap="innerHTML"
+                                                hx-indicator="#modal-indicator"
+                                                class="btn btn-outline-danger btn-sm">
+                                            <i class="fa fa-trash">
+                                                <span class="visually-hidden">Remove</span>
+                                            </i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>@($"${item.TotalPrice:###.00}")</td>
+                            </tr>
+                        }
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td class="fw-bold">
+                                @Cart.TotalItems
+                            </td>
+                            <td class="fw-bold">
+                                <span>@($"${Cart.TotalPrice:###.00}")</span>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="modal-body p-5">
+                    <div class="alert alert-primary d-flex align-items-center" role="alert">
+                        <i class="fa fa-shopping-cart"></i>
+                        <div>
+                            Your Current Shopping Cart Is Empty
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="modal-footer">
+                @if (Cart.HasItems)
+                {
+                    <button type="button" class="btn btn-danger" 
+                            hx-target="#product-modal-container"
+                            hx-swap="innerHTML"
+                            hx-indicator="#modal-indicator"
+                            hx-confirm="Are you sure you wish to empty your cart?"
+                            hx-delete hx-action="Delete" hx-controller="Cart">
+                        <i class="fa fa-trash-alt"></i> Empty Cart
+                    </button>
+                }
+                <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

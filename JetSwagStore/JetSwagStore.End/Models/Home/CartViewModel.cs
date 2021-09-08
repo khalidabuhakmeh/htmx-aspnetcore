@@ -23,8 +23,7 @@ public class CartViewModel
     public double TotalPrice => Items.Sum(c => c.TotalPrice);
     public CartItemViewModel? HasProduct(int productId) => Items.FirstOrDefault(i => i.ProductId == productId);
     public CartItemViewModel? HasProductOption(int productId, int? optionId) => Items.FirstOrDefault(i => i.ProductId == productId && i.OptionId == optionId);
-    
-    public bool IsHtmxOutOfBandSwap { get; set; }
+    public bool HasItems => Items.Any();
 }
 
 public class CartItemViewModel

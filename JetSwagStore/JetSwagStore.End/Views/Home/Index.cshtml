@@ -1,7 +1,7 @@
 ﻿@model JetSwagStore.Models.Home.IndexViewModel
-
 @{
     ViewData["Title"] = "Home Page";
+    System.Diagnostics.Debug.Assert(Model != null, nameof(Model) + " != null");
 }
 
 @section Header
@@ -30,7 +30,9 @@
                    hx-get
                    hx-action="index"
                    hx-controller="home"
+                   hx-route-category="@Model.Category?.Name"
                    hx-target="#results"
+                   hx-swap="outerHtml"
                    hx-trigger="keyup changed delay:250ms"
                    hx-indicator="#loading"
                    autocomplete="off"
@@ -44,16 +46,4 @@
     </form>
 </div>
 
-<div class="row mb-2">
-    <h2>
-        <i id="loading" class="fa fa-tshirt"></i> @Model.CategoryDisplay
-        @if (Model.HasQuery)
-        {
-            <span class="text-black-50 fst-italic">Searched:"@Model.Query"</span>
-        }
-    </h2>
-</div>
-
-<div id="results" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
 @await Html.PartialAsync("_Products")
-</div>

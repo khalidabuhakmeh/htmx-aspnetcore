@@ -15,11 +15,11 @@ public class ShoppingCartViewModelFilter : ActionFilterAttribute
             var db = context.HttpContext.RequestServices.GetRequiredService<StoreDbContext>();
             var currentShoppingCart = context.HttpContext.RequestServices.GetRequiredService<CurrentShoppingCart>();
 
-            var cart = await db.FindShoppingCart(currentShoppingCart.Id);
+            var cart = await db.ShoppingCarts.FindAsync(currentShoppingCart.Id);
             if (cart != null)
             {
                 var currentCart = new CartViewModel(cart) {
-                    IsHtmxOutOfBandSwap = context.HttpContext.Request.IsHtmx()
+                    //IsHtmxOutOfBandSwap = context.HttpContext.Request.IsHtmx()
                 };
                 
                 controller.ViewData["CurrentCart"] =  currentCart;

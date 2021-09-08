@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
 namespace JetSwagStore.Models.Migrations
 {
     public partial class Initial : Migration

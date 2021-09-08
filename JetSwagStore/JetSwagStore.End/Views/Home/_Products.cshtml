@@ -3,7 +3,20 @@
     System.Diagnostics.Debug.Assert(Model != null, nameof(Model) + " != null");
 }
 
-@foreach (var product in Model.Results)
-{
-    @await Html.PartialAsync("_Product", product)
-}
+<div id="results">
+    <div class="row mb-2">
+        <h2>
+            <i id="loading" class="fa fa-tshirt"></i> @Model.CategoryDisplay
+            @if (Model.HasQuery)
+            {
+                <span class="text-black-50 fst-italic">Searched:"@Model.Query"</span>
+            }
+        </h2>
+    </div>
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
+        @foreach (var product in Model.Results)
+        {
+            @await Html.PartialAsync("_Product", product)
+        }
+    </div>
+</div>

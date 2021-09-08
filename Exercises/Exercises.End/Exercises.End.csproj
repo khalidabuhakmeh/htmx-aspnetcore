@@ -8,7 +8,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Branchy" Version="0.0.2" />
       <PackageReference Include="Htmx" Version="0.0.7" />
       <PackageReference Include="Htmx.TagHelpers" Version="0.0.7" />
       <PackageReference Include="Lib.AspNetCore.ServerSentEvents" Version="6.0.0" />

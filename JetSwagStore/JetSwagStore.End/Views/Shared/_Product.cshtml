@@ -2,12 +2,13 @@
 @{
     System.Diagnostics.Debug.Assert(Model != null, nameof(Model) + " != null");
     var id = $"shopItem-{Model.Info.Id}";
+    var oob = Model.ShouldRenderCartButton ? "true" : null;
 }
 @if (Model.ShouldRenderCartButton)
 {
     @await Html.PartialAsync("_CartButton")
 }
-<div id="@id" class="col mb-5" hx-swap-oob="true">
+<div id="@id" class="col mb-5" hx-swap-oob="@oob">
     <div class="card h-100">
         @if (Model.IsOnSale)
         {
@@ -60,16 +61,14 @@
                 else
                 {
                     <form hx-post
-                          hx-action="Update"
+                          hx-action="Add"
                           hx-controller="Cart"
-                          hx-target="#@id"
-                          hx-indicator="#@id-indicator"
-                          hx-swap="outerHTML">
+                          hx-indicator="#@id-indicator">
                         <input type="hidden" name="ProductId" value="@Model.Info.Id"/>
                         @if (isInCart)
                         {
                             <div class="input-group mt-auto">
-                                <input type="number" min="0" max="100" class="form-control" name="Quantity" value="@item.Quantity">
+                                <input type="number" min="0" max="100" class="form-control" name="Quantity" value="@item?.Quantity">
                                 <button
                                     type="submit"
                                     class="btn btn-outline-dark btn-sm">

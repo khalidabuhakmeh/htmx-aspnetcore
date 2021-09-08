@@ -1,12 +1,8 @@
-using System.Linq;
 using Htmx;
 using JetSwagStore.Models;
 using JetSwagStore.Models.Cart;
-using JetSwagStore.Models.Extensions;
 using JetSwagStore.Models.Home;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.Options;
-using Microsoft.EntityFrameworkCore;
 
 namespace JetSwagStore.Controllers;
 
@@ -23,72 +19,83 @@ public class CartController : Controller
     }
 
     [HttpPost, Route("")]
-    public async Task<IActionResult> Update([FromForm] UpdateCartRequest input)
+    public async Task<IActionResult> Add([FromForm] UpdateCartRequest input)
     {
-        var product = await db.Products
-            .Include(p => p.Options)
-            .Include(p => p.Categories)
-            .FirstOrDefaultAsync(p => p.Id == input.ProductId);
-
-        var option = product?.Options.FirstOrDefault(p => p.Id == input.ProductOptionId);
-
-        if (product is null)
-        {
-            return BadRequest("Product or option was not found.");
-        }
-
-        var cart = await db.FindShoppingCart(currentShoppingCart.Id);
-
         if (input.Remove)
         {
             input.Quantity = 0;
         }
 
-        if (cart is not null)
+        var (product, option) =
+            await db.UpdateShoppingCart(
+                input.ProductId,
+                input.ProductOptionId,
+                currentShoppingCart.Id,
+                input.Quantity
+            );
+
+        if (option is not null)
         {
-            var item = cart.Items
-                .Where(i => i.ProductId == product.Id)
-                .If(option != null, q => q.Where(p => p.ProductOptionId == option?.Id))
-                .FirstOrDefault();
-
-            if (item == null)
+            return PartialView("_ProductOptions", new ProductWithOptionsViewModel
             {
-                item = new ShoppingCartItem
-                {
-                    Product = product,
-                    Option = option
-                };
-                cart.Items.Add(item);
-            }
-
-            item.Quantity = input.Quantity;
-
-            if (input.Quantity == 0)
-            {
-                cart.Items.Remove(item);
-            }
-
-            await db.SaveChangesAsync();
-        }
-
-        if (!Request.IsHtmx())
-        {
-            return RedirectToAction("Index", "Home");
-        }
-
-        // added via card or view options
-        return option is not null
-            ? PartialView("_ProductOptions", new ProductWithOptionsViewModel
-            {
-                Info = product,
+                Info = product!,
                 ProductOptionId = option.Id,
                 ShouldRenderCartButton = true,
                 InstantlyShowModal = true
-            })
-            : PartialView("_Product", new ProductViewModel
-            {
-                Info = product,
-                ShouldRenderCartButton = true
             });
+        }
+
+        // added via card or view options
+        return PartialView("_Product", new ProductViewModel
+        {
+            Info = product!,
+            ShouldRenderCartButton = true
+        });
+    }
+
+    [HttpPut, Route("")]
+    public async Task<IActionResult> Update([FromForm] UpdateCartRequest input)
+    {
+        if (input.Remove)
+        {
+            input.Quantity = 0;
+        }
+
+        await db.UpdateShoppingCart(
+            input.ProductId,
+            input.ProductOptionId,
+            currentShoppingCart.Id,
+            input.Quantity
+        );
+
+        // We should update the UI
+        var product = await db.Products.FindAsync(input.ProductId);
+        var model = new ProductViewModel
+        {
+            Info = product!,
+            ShouldRenderCartButton = true
+        };
+
+        return PartialView("_CartItems", model);
+    }
+
+    [HttpGet, Route("")]
+    public IActionResult Show()
+    {
+        return PartialView("_CartItems");
+    }
+
+    [HttpDelete, Route("")]
+    public async Task<IActionResult> Delete()
+    {
+        var cart = await db.ShoppingCarts.FindAsync(currentShoppingCart.Id);
+        cart?.Items.Clear();
+        await db.SaveChangesAsync();
+        
+        Response.Htmx(htmx => {
+            htmx.Refresh();
+        });
+
+        return PartialView("_CartItems");
     }
 }

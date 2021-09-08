@@ -19,8 +19,4 @@
       <ProjectReference Include="..\JetSwagStore.Models\JetSwagStore.Models.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Views\Products" />
-    </ItemGroup>
-
 </Project>

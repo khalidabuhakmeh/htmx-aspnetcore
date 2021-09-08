@@ -5,7 +5,7 @@ namespace JetSwagStore.Models.Home;
 
 public class ProductViewModel
 {
-    public Product Info { get; set; }
+    public Product Info { get; set; } = null!;
     
     public bool IsOnSale => Info.DiscountPrice.HasValue;
     public bool HasOptions => Info.Options.Any();

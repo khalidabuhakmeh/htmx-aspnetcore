@@ -1,9 +1,10 @@
 ﻿using System.Linq;
+using JetSwagStore.Models.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace JetSwagStore.Models;
 
-public class StoreDbContext : DbContext
+public class  StoreDbContext : DbContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder
@@ -149,14 +150,60 @@ public class StoreDbContext : DbContext
                 new() {Id = 9, Name = "X-Large", CurrentInventory = 20, AdditionalCost = 10, ProductId = 7},
                 new() {Id = 10, Name = "XX-Large", CurrentInventory = 20, AdditionalCost = 20, ProductId = 7}
             );
+
+        modelBuilder
+            .Entity<ShoppingCart>()
+            .Navigation(x => x.Items).AutoInclude();
+
+        modelBuilder
+            .Entity<ShoppingCartItem>()
+            .Navigation(x => x.Product).AutoInclude();
+
+        modelBuilder.Entity<Product>()
+            .Navigation(x => x.Options).AutoInclude();
     }
 
-    public async Task<ShoppingCart?> FindShoppingCart(int id)
+    public async Task<(Product? product, ProductOption? option)> 
+        UpdateShoppingCart(int productId, int? productOptionId, int shoppingCartId, int quantity)
     {
-        return await ShoppingCarts
-            .Include(s => s.Items)
-            .ThenInclude(i => i.Product)
-            .Where(c => c.Id == id)
-            .FirstOrDefaultAsync();
+        var product = await Products
+            .Include(p => p.Options)
+            .Include(p => p.Categories)
+            .FirstOrDefaultAsync(p => p.Id == productId);
+
+        var option = productOptionId.HasValue
+            ? product?.Options.FirstOrDefault(p => p.Id == productOptionId)
+            : null;
+
+        var cart = await ShoppingCarts.FindAsync(shoppingCartId);
+
+        if (cart is null || product is null) 
+            return (product, option);
+        
+        var item = cart.Items
+            .Where(i => i.ProductId == product.Id)
+            .If(option != null, q => q.Where(p => p.ProductOptionId == option?.Id))
+            .FirstOrDefault();
+
+        if (item == null)
+        {
+            item = new ShoppingCartItem
+            {
+                Product = product,
+                Option = option
+            };
+            cart.Items.Add(item);
+        }
+
+        item.Quantity = quantity;
+
+        if (quantity == 0)
+        {
+            cart.Items.Remove(item);
+        }
+
+        await SaveChangesAsync();
+
+        return (product, option);
     }
 }
