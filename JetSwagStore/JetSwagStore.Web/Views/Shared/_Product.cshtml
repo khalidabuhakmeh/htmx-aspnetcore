@@ -4,10 +4,6 @@
     var id = $"shopItem-{Model.Info.Id}";
     var oob = Model.ShouldRenderCartButton ? "true" : null;
 }
-@if (Model.ShouldRenderCartButton)
-{
-    @await Html.PartialAsync("_CartButton")
-}
 <div id="@id" class="col mb-5" hx-swap-oob="@oob">
     <div class="card h-100">
         @if (Model.IsOnSale)
@@ -95,3 +91,7 @@
         </div>
     </div>
 </div>
+@if (Model.ShouldRenderCartButton)
+{
+    @await Html.PartialAsync("_CartButton")
+}

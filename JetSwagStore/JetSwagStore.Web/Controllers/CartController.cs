@@ -92,6 +92,7 @@ public class CartController : Controller
         cart?.Items.Clear();
         await db.SaveChangesAsync();
         
+        // force page to do a complete refresh
         Response.Htmx(htmx => {
             htmx.Refresh();
         });

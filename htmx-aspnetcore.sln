@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercises.End", "Exercises\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetSwagStore.Models", "JetSwagStore\JetSwagStore.Models\JetSwagStore.Models.csproj", "{244DD436-55EC-40C5-BB86-0548616213AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetSwagStore.End", "JetSwagStore\JetSwagStore.End\JetSwagStore.End.csproj", "{DB534754-A4B4-4638-AE6E-318AFB96ECA6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetSwagStore.Web", "JetSwagStore\JetSwagStore.Web\JetSwagStore.Web.csproj", "{DB534754-A4B4-4638-AE6E-318AFB96ECA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

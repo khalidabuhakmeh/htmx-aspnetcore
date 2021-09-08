@@ -1,9 +1,4 @@
 @model JetSwagStore.Models.Home.ProductViewModel
-@* Update The Product that was updated, along with cart *@
-@if (Model is not null)
-{
-    @await Html.PartialAsync("_Product", Model)
-}
 <div id="modal-backdrop" class="modal-backdrop show fade" style="display:block;"></div>
 <div id="modal" class="modal show fade" tabindex="-1" style="display:block;">
     <div id="modal-dialog" class="modal-dialog modal-lg modal-dialog-centered">
@@ -121,3 +116,8 @@
         </div>
     </div>
 </div>
+@* Update The Product that was updated, along with cart *@
+@if (Model is not null)
+{
+    @await Html.PartialAsync("_Product", Model)
+}

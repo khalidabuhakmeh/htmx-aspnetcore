@@ -3,7 +3,6 @@
     System.Diagnostics.Debug.Assert(Model != null, nameof(Model) + " != null");
     var showModalCss = Model.InstantlyShowModal ? "show" : null;
 }
-@await Html.PartialAsync("_Product")
 <div id="modal-backdrop" class="modal-backdrop fade @showModalCss" style="display:block;"></div>
 <div id="modal" class="modal fade @showModalCss" tabindex="-1" style="display:block;">
     <div id="modal-dialog" class="modal-dialog modal-lg modal-dialog-centered">
@@ -91,3 +90,5 @@
         </div>
     </div>
 </div>
+@* HTMX will replace this element if it exists on the page *@
+@await Html.PartialAsync("_Product")
