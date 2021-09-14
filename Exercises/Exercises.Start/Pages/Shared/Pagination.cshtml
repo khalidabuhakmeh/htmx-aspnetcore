@@ -1,0 +1,31 @@
+@using System.Text.RegularExpressions
+@{
+    string Name(string page)
+    {
+        var name = page.Split("_", StringSplitOptions.TrimEntries)[^1];
+        return Regex.Replace(name, "([A-Z])", " $1", RegexOptions.Compiled).Trim();
+    }
+}
+<div class="d-flex justify-content-between mt-5">
+    @if (ViewBag.Previous is string previous)
+    {
+        <a asp-page="@previous" class="btn btn-outline-primary">
+            <i class="fa fa-arrow-left"></i>
+            @Name(previous)
+        </a>
+    }
+    @if (ViewBag.Home is true)
+    {
+        <a asp-page="Index" class="btn btn-outline-primary">
+            <i class="fa fa-home"></i>
+            Home
+        </a>
+    }
+    @if (ViewBag.Next is string next)
+    {
+        <a asp-page="@next" class="btn btn-outline-primary">
+            @Name(next)
+            <i class="fa fa-arrow-right"></i>
+        </a>
+    }
+</div>

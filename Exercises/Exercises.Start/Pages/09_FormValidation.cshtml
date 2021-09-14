@@ -1,0 +1,60 @@
+@page "/examples/09-formvalidation"
+@model Exercises.Pages.FormValidation
+
+@{
+    ViewBag.Title = "Form Validation";
+    ViewBag.Previous = "08_Shortcuts";
+    ViewBag.Next = "10_Polling";
+}
+
+<markdown>
+    # 9. Form Validation
+
+    Validation usually is only considered safe to do on the server. While client-side validation can limit the number of requests sent to your server for processing, it cannot guarantee that a malicious party hasn't tampered with the code, bypassing clientside validation. In addition, the complexity of some forms may make it difficult, if not impossible, to duplicate the same behavior on both the server and the client.
+    
+    HTMX, in concert with ASP.NET Core's validation, can help you build validated forms without worrying about the need for any client-side validation. 
+    
+    In this sample, you'll submit the form and lean on ASP.NET Core to place the appropriate validation messages within the UI. 
+    
+    **Note: The code found in `Shared/_Form` is the first instance of Hyperscript in this project. We use it to disable the submit button so that users don't submit multiple requests.**
+
+    ---
+</markdown>
+
+<div class="card">
+
+    <div class="card-header">
+        <h3>Important Form</h3>
+    </div>
+
+    <div class="card-body">
+        <div class="alert alert-info mt-2">
+            <p>The request uses <code>Task.Delay(Timespan.FromSeconds(1))</code> on the server so that you can see the loading spinner. Otherwise, <strong>HTMX + ASP.NET Core are way too fast.</strong></p>
+        </div>
+
+        <div class="section">
+            @await Html.PartialAsync("_Form")
+        </div>
+    </div>
+</div>
+
+@section head {
+    <style>
+    .invalid-feedback {
+        display: block;
+    }
+    .input-validation-error {
+        border-color: #dc3545;
+        padding-right: 4.125rem;
+        background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e),url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e);
+        background-position: right .75rem center,center right 2.25rem;
+        background-size: 16px 12px,calc(.75em + .375rem) calc(.75em + .375rem);
+    }
+    .htmx-indicator{
+        display:none;
+    }
+    .htmx-request .htmx-indicator{
+        display:inline;
+    }
+    </style>
+}

@@ -1,0 +1,21 @@
+@model Exercises.Pages.Scroll
+@{
+    ArgumentNullException.ThrowIfNull(Model);
+    var end = Model.Cursor + 19;
+}
+
+@for (var i = Model.Cursor; i <= end; i++)
+{
+    <div
+        class="card mb-4 ms-1" aria-hidden="true">
+        <img alt="random image" 
+             width="125"
+             height="125"
+             src="https://picsum.photos/125/125?cache=@DateTime.Now.Ticks" class="card-img-top"/>
+        <div class="card-body bg-dark text-white">
+            <div class="h6 card-title text-center ">
+                Card #@i
+            </div>
+        </div>
+    </div>
+}

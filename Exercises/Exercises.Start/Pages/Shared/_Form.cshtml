@@ -1,0 +1,34 @@
+@model Exercises.Pages.FormValidation
+
+<form class="form-horizontal needs-validation">
+    <!-- Text input-->
+    <div class="mb-3">
+        <label class="form-label" asp-for="Name"></label>
+        <input type="text" class="form-control" asp-for="Name">
+        <div class="invalid-feedback">
+            <span asp-validation-for="Name"></span>
+        </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="mb-3">
+        <label class="form-label" asp-for="Age"></label>
+        <input type="text" class="form-control" asp-for="Age">
+        <div class="invalid-feedback">
+            <span asp-validation-for="Age"></span>
+        </div>
+    </div>
+
+    <div class="control">
+        <button id="submitButton" type="submit" class="btn btn-primary">
+            <span class="htmx-indicator">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span class="visually-hidden">Loading...</span>
+            </span>
+            Submit
+        </button>
+
+        @Html.AntiForgeryToken()
+    </div>
+
+</form>

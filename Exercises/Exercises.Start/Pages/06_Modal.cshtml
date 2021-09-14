@@ -1,0 +1,85 @@
+@page "/examples/06-modal"
+@model Exercises.Pages.Modal
+
+@{
+    ViewBag.Title = "Modals";
+    ViewBag.Next = "07_Tabs";
+    ViewBag.Previous = "06_Scroll";
+}
+
+<markdown>
+    # 6. Server-side Powered Modals
+
+    Modals are a valuable tool for grabbing the attention of a user when something critical has occurred. In this sample, we'll utilize **Bootstrap's** modal by having HTMX inject the resulting HTML after we've submitted the form.  You'll use the `hx-trigger` of `submit` on the form element to include all the information located within the form tag.
+
+    We'll use some optional JavaScript to transition the modal in with some animation. We also have some additional JavaScript to handle Bootstrap's validation classes. Finally, a clientside function named `closeModal` removes the HTML from the page when you've dismissed the modal. You probably noticed the utilization of `htmx:afterOnLoad`. HTMX has many events that each HTMX infused element can hook into to do pre-and post-processing.
+
+    The modal is an excellent example of leveraging clientside code to enhance the HTMX experience. While you could certainly achieve the same behaviors with HTMX calls to the server, you want to remain mindful of any unnecessary network traffic.
+    
+    ---
+</markdown>
+
+<div class="card m-5">
+    <div class="card-header bg-primary text-white">
+        <h2>Fancy Newsletter Signup</h2>
+    </div>
+    <div class="card-body">
+        <form id="newsletter">
+
+            <div class="form-floating mb-3">
+                <input type="email"
+                       name="email"
+                       required class="form-control" id="email" placeholder="name@example.com">
+                <label for="email">Email address</label>
+            </div>
+            <button type="submit" class="btn btn-outline-primary btn-lg float-end">
+                Subscribe
+            </button>
+        </form>
+        <div id="modals-here"></div>
+    </div>
+</div>
+
+
+@section end
+{
+    <script type="text/javascript">
+    
+    let newsletter = document.getElementById('newsletter');
+    newsletter.addEventListener('htmx:afterOnLoad', () => {
+        const backdrop = document.getElementById("modal-backdrop");
+        const modal = document.getElementById("modal");
+        
+        setTimeout(() => {
+            modal.classList.toggle("show")
+            backdrop.classList.toggle("show")
+        }, 10);
+    });
+    
+    let inputs = newsletter.querySelectorAll('input');
+    inputs.forEach((e) => {
+        e.oninvalid = () => e.classList.add('is-invalid');
+        e.onchange = () => {
+            if (e.validity.valid) {  
+                e.classList.remove('is-invalid');
+            } else {
+                e.classList.add('is-invalid');
+            }
+        }
+    });
+    
+    function closeModal() {
+    	const container = document.getElementById("modals-here");
+    	const backdrop = document.getElementById("modal-backdrop");
+    	const modal = document.getElementById("modal");
+    
+    	modal.classList.toggle("show")
+    	backdrop.classList.toggle("show")
+    
+    	setTimeout(function() {
+    		container.removeChild(backdrop)
+    		container.removeChild(modal)
+    	}, 200)
+    }
+    </script>
+}

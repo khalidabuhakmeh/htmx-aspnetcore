@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetSwagStore.Models", "JetS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetSwagStore.Web", "JetSwagStore\JetSwagStore.Web\JetSwagStore.Web.csproj", "{6D8B6CF0-815B-43F8-8202-C75A4608B17D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercises.Start", "Exercises\Exercises.Start\Exercises.Start.csproj", "{17DCDDA7-058F-4FD8-BE87-45BD77B255F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,7 @@ Global
 		{9F221DED-210C-4907-BE8A-7D0D489F9F70} = {91212099-7C38-4BF6-8DB4-69A6E32BBE81}
 		{244DD436-55EC-40C5-BB86-0548616213AF} = {23957457-27D1-43B8-B311-0B8746A02922}
 		{6D8B6CF0-815B-43F8-8202-C75A4608B17D} = {23957457-27D1-43B8-B311-0B8746A02922}
+		{17DCDDA7-058F-4FD8-BE87-45BD77B255F2} = {91212099-7C38-4BF6-8DB4-69A6E32BBE81}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{9F221DED-210C-4907-BE8A-7D0D489F9F70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -39,5 +42,9 @@ Global
 		{6D8B6CF0-815B-43F8-8202-C75A4608B17D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D8B6CF0-815B-43F8-8202-C75A4608B17D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D8B6CF0-815B-43F8-8202-C75A4608B17D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17DCDDA7-058F-4FD8-BE87-45BD77B255F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17DCDDA7-058F-4FD8-BE87-45BD77B255F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17DCDDA7-058F-4FD8-BE87-45BD77B255F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17DCDDA7-058F-4FD8-BE87-45BD77B255F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,34 @@
+@page "/examples/12-taghelpers"
+@model Exercises.Pages.TagHelpers
+
+@{
+    ViewBag.Title = "Tag Helpers";
+    ViewBag.Previous = "11_ServerEvents";
+    ViewBag.Next = "13_ClientsideTemplates";
+}
+
+<markdown>
+    # 12. ASP.NET Core Tag Helpers
+
+    During your journey through the different samples, you've likely noticed the use of `Url.Page` to generate links to each Razor page. While the approach works, it can be noisy and tedious. Instead, you can use the tag helpers found in **Htmx.TagHelpers** to generate links to any ASP.NET Core endpoint. HTMX.NET models the tag helpers after the `asp-` tag helpers found in ASP.NET Core so that you can create links to endpoints, MVC actions, and Razor Pages. Let's look at an example.
+
+    ```
+    hx-get
+    hx-page="12_TagHelpers"
+    hx-target="#target"
+    ```
+
+    In this case, you need to specify the HTTP method version of the `hx` attribute, and then you can use `hx-page` to point to our Razor Page. Using these tag helpers can help you keep our Razor views clean and concise.
+
+    ---
+</markdown>
+
+<div class="card m-5 p-5 ms-0 text-center">
+    <h2 id="target">Change Me!</h2>
+
+    <!-- add htmx attributes to button -->
+    <!-- will get this page -->
+    <button class="btn btn-primary btn-lg px-4">
+        Click Me
+    </button>
+</div>

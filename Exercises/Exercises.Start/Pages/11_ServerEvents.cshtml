@@ -1,0 +1,34 @@
+@page "/examples/11-serversentevents"
+@model Exercises.Pages.ServerEvents
+
+@{
+    ViewBag.Title = "Server Sent Events";
+    ViewBag.Previous = "10_Polling";
+    ViewBag.Next = "12_TagHelpers";
+}
+
+<markdown>
+    # 11. Server Sent Events (SSE)
+
+    Server Sent Events (SSE) is a technology that allows a server to communicate directly with a connected client. SSE can be more efficient in certain circumstances, as the client will only request to retrieve information when the server notifies the client of a change. However, one drawback to SSE is that clients need to remain connected, taking up resources like memory and CPU.
+    
+    With HTMX and ASP.NET Core, it is pretty straightforward to use SSE events. This project uses the NuGet package `Lib.AspNetCore.ServerSentEvents` to propagate changes to all connected clients. To see the service in action, look at the file `Models/ServerEventsWorker` and the Razor page `11_ServerEvents`. 
+    
+    As you may have noticed, the number below continues to change. 
+    
+    **Hint: Try opening several tabs to the same page. You'll notice the numbers all coincide and update at the same time.**
+    
+    ---
+</markdown>
+
+<div class="d-flex justify-content-center">
+    <div class="card mb-3 text-center" style="max-width: 18rem;">
+        <div class="card-header bg-primary text-white">Featured Random Number</div>
+        <div class="card-body">
+            <h5 class="card-title">The Random Number is..</h5>
+            <p class="card-text fa-4x">
+                <span>@Number.Value</span>
+            </p>
+        </div>
+    </div>
+</div>

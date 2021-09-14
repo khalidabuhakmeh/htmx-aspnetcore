@@ -1,0 +1,65 @@
+@page "/examples/13-clientside-templates"
+@model Exercises.Pages.ClientsideTemplates
+
+@{
+    ViewBag.Title = "Clientside Templates";
+    ViewBag.Previous = "12_ServerEvents";
+    ViewBag.Next = "14_OutOfBand";
+}
+
+@section end{
+    <script src="~/js/extra/client-side-templates.js"></script>
+    <script src="~/js/extra/mustache.js"></script>
+}
+
+<markdown>
+    # 13. Clientside Templates
+    
+    There are many ways development teams may work on building client-side experiences. For example, you may have chosen to start by making a web application first, focusing on HTML and HTTP interactions. On the other hand, you may have also started by building JSON APIs and investing significantly there. If you find yourself in the latter camp, there's still an opportunity to utilize HTMX. 
+    
+    HTMX supports extensions, one of those being [**clientside templates**](https://htmx.org/extensions/client-side-templates/), with support for templating languages like **Mustache**, **Handlebars**, and **Nunjucks**.  You will need additional dependencies such as the HTMX extension, along with the templating library of your choice. For instance, in this sample, you'll be using **Mustache**.
+    
+    The extension allows you to make HTMX calls to API endpoints known to return JSON and only JSON. Before injecting the response, HTMX will process the JSON through an HTML template found on the page. You'll need to use the `hx-ext` to enable the extension of the clientside template, along with the `template` tag to define our template.
+    
+    ```html
+    <div hx-ext="client-side-templates" class="card m-5 p-5 ms-0 text-center">
+        <div id="target">
+            <h2>Change Me!</h2>
+        </div>
+    
+        <!-- add htmx attributes to button -->
+        <!-- will get this page -->
+        <button class="btn btn-primary btn-lg px-4"
+                hx-get
+                hx-page="13_ClientsideTemplates"
+                hx-page-handler="JSON"
+                mustache-template="foo"
+                hx-target="#target">
+            Click Me
+        </button>
+    
+        <template id="foo">
+            <p class="fs-1"> The Id is #{{id}} with the author, {{author}}, writing "{{title}}".</p>
+        </template>
+    </div>
+    ```
+    
+    Now you can continue to build an immersive clientside experience while also developing your JSON API.
+
+</markdown>
+
+<div hx-ext="client-side-templates" class="card m-5 p-5 ms-0 text-center">
+    <div id="target">
+        <h2>Change Me!</h2>
+    </div>
+
+    <!-- add htmx attributes to button -->
+    <!-- will get this page -->
+    <button class="btn btn-primary btn-lg px-4">
+        Click Me
+    </button>
+
+    <template id="foo">
+        <p class="fs-1"> The Id is #{{id}} with the author, {{author}}, writing "{{title}}".</p>
+    </template>
+</div>

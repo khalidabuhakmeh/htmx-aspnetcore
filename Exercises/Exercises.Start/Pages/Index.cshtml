@@ -1,0 +1,56 @@
+@page "/"
+@model Exercises.End.Pages.Index
+@{ 
+    ViewBag.Title = "Home";
+}
+
+<markdown>
+    # Getting Started with HTMX <br/> <span class="fs-3"> For ASP.NET Core Developers</span>
+    ## <span class="fs-4"> by <a href="https://twitter.com/buhakmeh" class="text-decoration-none"><i class="fab fa-twitter text-primary" aria-hidden="true"></i> Khalid Abuhakmeh</a></span>
+
+    ---
+
+    **_Hello, [ASP.NET Core](https://dot.net) developers!_** 
+    
+    If you're running this solution, you're likely following along with the video series from JetBrains, or you're very interested in [HTMX](https://htmx.org) as a solution to your frontend problems.
+
+    Let's start by describing what HTMX is for folks new to the library. HTMX is a JavaScript library that performs HTTP requests and relies heavily on the server stack's ability to deliver HTML fragments. HTMX then processes those responses into an existing page. Developers can decorate any HTML element with HTMX attributes that pair with HTTP methods: `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`.
+
+    To understand what HTMX is, we also should think about what it is not. It is not a complicated framework approach to building client-side user experiences. It does not require build or pack tools, and it does not require an "all-in" approach, where you need to write every part of your front end using HTMX. Instead, the library gives you the freedom to enhance your user experience when you choose to do so. In fact, to install HTMX, all you need is a pre-minized JavaScript file in your HTML pages. That's it! 
+
+    As you may already know, ASP.NET Core is a powerful server-side technology and pairs well with the HTMX philosophy. This solution will show you how you can pair the two technologies together to deliver fantastic user experiences with a few lines of code.
+    
+    **_Let's Get Started!_**
+
+    ## Exercises
+    
+    Be sure to look at the code to see how it all comes together.
+
+    1. <a asp-page="01_HelloWorld">Hello World</a>
+    1. <a asp-page="02_Counter">Counter</a>
+    1. <a asp-page="03_Selects">Select (Dropdowns)</a>
+    1. <a asp-page="04_Search">Search</a>
+    1. <a asp-page="05_Scroll">Scroll</a>
+    1. <a asp-page="06_Modal">Modal</a>
+    1. <a asp-page="07_Tabs">Tabs</a>
+    1. <a asp-page="08_Shortcuts">Shortcuts</a>
+    1. <a asp-page="09_FormValidation">Form Validation</a>
+    1. <a asp-page="10_Polling">Polling</a>
+    1. <a asp-page="11_ServerEvents">Server Sent Events</a>
+    1. <a asp-page="12_TagHelpers">ASP.NET Core Tag Helpers</a>
+    1. <a asp-page="13_ClientsideTemplates">Clientside Templates &amp; JSON APIs</a>
+    1. <a asp-page="14_OutOfBand">Out of Band Swaps</a>
+    
+    ## Related Links
+    
+    This section includes links to related content you may want to be familiar with.
+    
+    - [JetBrains .NET Guide](https://www.jetbrains.com/dotnet/guide/)
+    - [HTMX Documentation](https://htmx.org)
+    - [.NET SDK download](https://dotnet.microsoft.com/download)
+    - [HTMX.NET](https://khalidabuhakmeh.com/htmx.net)
+    - [Simple, Fast Frontends with HTMX](https://www.youtube.com/watch?v=cBfz4W_KvEI)
+    - [HTMX Twitter](https://twitter.com/htmx_org)
+    - [JetBrains dotUltimate](https://www.jetbrains.com/dotnet/)
+
+</markdown>

@@ -1,0 +1,44 @@
+@page "/examples/03-selects"
+@model Exercises.Pages.Selects
+@{ 
+    ViewBag.Title = "Selects";
+    ViewBag.Previous = "02_Counter";
+    ViewBag.Next = "04_Search";
+}
+
+<markdown>
+    # 3. Selects <span class="fs-3">(Dropdowns)</span>
+    
+    The select HTML element is one of the most commonly used in UX development, allowing users to select from a predetermined list of options. ASP.NET Core developer may also refer to the element as a **dropdown**, a holdover from the ASP.NET WebForm era. Regardless of what you call them, they are fantastic.
+    
+    One of the most common patterns with select elements is cascading selects. The general idea is that a selection in one component affects the visible values in another. Stay around in web development long enough, and you'll likely have to implement this pattern. With HTMX, you can accomplish the described behavior with a few attributes and an ASP.NET Core endpoint.
+    
+    Instead of returning all the results of the select elements and filtering them on the client, we can lean on ASP.NET Core to perform the complex logic and only return the required information.
+    
+    **Hint: to accomplish this, you'll need to add `hx-get` on both select dropdowns. You can also complete this sample by revealing each dropdown as values are selected. Experiment and to see what feels more natural.**
+</markdown>
+
+<div class="card p-4">
+    <div class="form-group">
+        <label>Select a Cuisine</label>
+        <select asp-for="Cuisine" 
+                asp-items="Model.CuisineItems"
+                hx-target="#foods">
+        </select>
+    </div>
+    <div class="form-group mt-2">
+        <label>Select a Food</label>
+        <select asp-for="Food" class="form-control" id="foods">
+            <option disabled selected value="">Pick a Cuisine First</option>
+        </select>
+    </div>
+    
+    <div class="alert alert-success mt-3" role="alert">
+        <h4 id="love" class="alert-heading text-center">
+            <i class="fa fa-clock"></i>
+            Waiting For Food Selection
+        </h4>      
+    </div>
+
+</div>
+

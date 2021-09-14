@@ -1,0 +1,40 @@
+@page "/examples/02-counter"
+@model Exercises.Pages.Counter
+@{
+    ViewBag.Title = "Counters";
+    ViewBag.Previous = "01_HelloWorld";
+    ViewBag.Next = "03_Selects";
+}
+
+<markdown>
+    # 2. Counters!
+
+    We retrieved a static HTML snippet in the previous sample and replaced an element on the page, but what about maintaining the application state? We'll increment a counter on the server in this sample while updating our UI to reflect the change.  This time around, we'll use the `POST` action to show that HTMX supports most HTTP methods.
+
+    To accomplish the incrementing feature, we'll need to modify the following `button`. Similar to our `Hello, World` sample, it's a matter of a few attributes. The only difference is that we have a bit more server-side logic involved in maintaining the current count in this case.
+
+    Give it a try!
+
+    **Hint: You'll need to use `hx` attributes of `hx-post` and `hx-target`. For the backend ASP.NET Core code, check out the `1_Counter.cshtml.cs` file.**
+</markdown>
+
+<div class="card p-5 mb-4">
+    <div class="d-flex justify-content-between">
+        <div>
+            <!-- change the button -->
+            <button class="btn btn-primary">
+                <i class="fa fa-plus-circle"></i>
+                Increment
+            </button>
+        </div>
+        <div>
+            <h2 id="example_one_count" class="fs-2" style="text-align: right">
+                <span>0</span>
+            </h2>
+        </div>
+    </div>
+</div>
+
+<markdown>
+    **Note: We reset the count on page refreshes since we store the value in a static variable. Storage is an implementation detail, and you could keep the incremented value in a database for less volatility.**
+</markdown>

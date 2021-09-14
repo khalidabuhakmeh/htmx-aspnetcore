@@ -1,0 +1,71 @@
+@page "/examples/04-search"
+@model Exercises.Pages.Search
+
+@{
+    ViewBag.Title = "Search";
+    ViewBag.Previous = "03_Selects";
+    ViewBag.Next = "05_Scroll";
+}
+
+<markdown>
+    # 4. Search
+
+    Search is a fundamental part of all applications. Empowering your users to find any data within a system with a few keystrokes can transform how your users view your application. A great user experience for search is almost as necessary as the search results in themselves. With HTMX, we can lean on all the `input` events available to increase the responsiveness of our search experience. 
+    
+    The following example will show how to transform a tedious input into a debounced search-as-you-type experience. You'll be using the `hx-trigger` attribute with keywords like `keyup`, `changed`, and `delay:250ms` to hold a query until a user has stopped typing.
+    
+    On the ASP.NET Core side, we'll search an existing collection using the `Query` property. Note how the URL changes as the back-end code handle the client requests. We are utilizing HTMX response headers to push new URLs into the client's history. A powerful and necessary feature as we continue to build more complex user experiences.
+
+    You may also notice we have begun utilizing ASP.NET Core partial views. You must break down your user experience in terms of components to help create smaller Razor partials. In a worst-case scenario, you can lean on rendering the entire page, but in that case, you would lose most of the benefits of HTMX. It takes some practice, but I believe anyone can learn this skill. As always, there are many ways to solve a problem, so experiment and have fun.
+    
+    ---
+</markdown>
+
+<div class="card p-4 mb-3">
+    <h2 class="mb-3">
+        <img src="~/img/joystick.svg" alt="joystick" style="height: 2rem">
+        Retro Games
+        <img id="loading" class="htmx-indicator" src="~/img/pacman.gif" alt="search" width="16"/>
+    </h2>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="search-addon">
+            <img id="search-icon" src="~/img/search.svg" alt="search" width="16"/>
+        </span>
+        <input type="text"
+               asp-for="Query"
+               id="query"
+               autocomplete="off"
+               placeholder="Search"
+               class="form-control"
+               aria-label="Username"
+               aria-describedby="search-addon">
+    </div>
+
+    <table class="table table-borderless table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>Year</th>
+            <th>Publisher</th>
+            <th>Console</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody id="results">
+        @await Html.PartialAsync("_Results")
+        </tbody>
+    </table>
+</div>
+
+<markdown>
+    **Note: This is the most sophisticated UI experience so far, and yet there's not much to it. Amazing, right?!**
+</markdown>
+
+@section head {
+    <style>
+        /* change focus color */
+        .form-control:focus {
+            border-color: #ff80ff;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 100, 255, 0.5);
+        }
+    </style>
+}

@@ -1,0 +1,36 @@
+@model Exercises.Pages.Tabs
+@{ ArgumentNullException.ThrowIfNull(Model); }
+
+<div id="tabbed-content">
+    <ul class="nav nav-tabs">
+        @foreach (var tab in Model.Items)
+        {
+            <li class="nav-item">
+                <a>
+                    @tab
+                </a>
+            </li>
+        }
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane show active p-1 mt-3" role="tabpanel">
+            <h2>@Model.Tab</h2>
+            <hr>
+            <img alt="random image" 
+                 class="rounded float-end m-2 mt-1 easeload"
+                 width="200"
+                 height="200"
+                 onload="this.style.opacity = 1;"
+                 src="https://picsum.photos/200/200?cache=@DateTime.Now.Ticks" />
+            <p>
+                Commodo normcore truffaut VHS duis gluten-free keffiyeh iPhone taxidermy godard ramps anim pour-over.
+                Pitchfork vegan mollit umami quinoa aute aliquip kinfolk eiusmod live-edge cardigan ipsum locavore.
+                Polaroid duis occaecat narwhal small batch food truck.
+                PBR & B venmo shaman small batch you probably haven't heard of them hot chicken readymade.
+                Enim tousled cliche woke, typewriter single-origin coffee hella culpa.
+                Art party readymade 90's, asymmetrical hell of fingerstache ipsum.
+            </p>
+        </div>
+    </div>
+</div>
