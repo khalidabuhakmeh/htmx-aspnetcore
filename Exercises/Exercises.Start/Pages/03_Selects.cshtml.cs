@@ -34,12 +34,8 @@ namespace Exercises.Pages
                 return items;
             }
         }
-
-        [BindProperty(SupportsGet = true)]
-        public string? Cuisine { get; set; }
         
-        [BindProperty(SupportsGet = true)]
-        public string? Food { get; set; }
+        // TODO: Add Parameters
 
         public void OnGet()
         {
@@ -48,21 +44,17 @@ namespace Exercises.Pages
         public IActionResult OnGetFoods()
         {
             var html = new StringBuilder();
-            if (Cuisine is { Length: > 0 } cuisine && cuisines.TryGetValue(cuisine, out var foods))
-            {
-                html.AppendLine("<option disabled selected>Select a food</option>");
-                foreach (var food in cuisines[Cuisine!]) 
-                {
-                    html.AppendLine($"<option>{food}</option>");
-                }    
-            }
+            
+            // Todo: Generate Options
 
             return Content(html.ToString(), "text/html");
         }
 
         public IActionResult OnGetLove()
         {
-            return Content($"<span><i class=\"fa fa-heart\"></i> I love {Food}!</span>");
+            // Todo: Return Span
+            
+            return Content($"");
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Exercises.Pages
         public IActionResult OnPost()
         {
             // TODO: Increment the count on each request
-            return Content($"<span>{++count}</span>", "text/html");
+            return Content($"<span></span>", "text/html");
         }
     }
 }

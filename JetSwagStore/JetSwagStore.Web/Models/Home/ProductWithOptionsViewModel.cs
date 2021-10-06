@@ -14,7 +14,8 @@ public class ProductWithOptionsViewModel : ProductViewModel
         Info.Options.Select(i => new SelectListItem(i.Name, i.Id.ToString())).ToList();
     public bool InstantlyShowModal { get; set; }
 
-    public override HtmlString PriceDisplay {
+    public HtmlString CurrentOptionPriceDisplay
+    {
         get
         {
             if (!ProductOptionId.HasValue)

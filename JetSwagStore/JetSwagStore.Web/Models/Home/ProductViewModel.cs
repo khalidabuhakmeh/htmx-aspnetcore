@@ -11,7 +11,7 @@ public class ProductViewModel
     public bool HasOptions => Info.Options.Any();
     public bool ShouldRenderCartButton { get; set; }
 
-    public virtual HtmlString PriceDisplay
+    public HtmlString PriceDisplay
     {
         get
         {

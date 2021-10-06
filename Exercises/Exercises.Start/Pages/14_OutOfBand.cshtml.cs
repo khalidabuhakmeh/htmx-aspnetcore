@@ -15,6 +15,9 @@ namespace Exercises.Pages
 
         public IActionResult OnPostAddToCart(int count)
         {
+            
+            
+            
             TotalItemsInCart = count;
             RenderCartOutOfBand = true;
             return Partial("_ShoppingItem", this);

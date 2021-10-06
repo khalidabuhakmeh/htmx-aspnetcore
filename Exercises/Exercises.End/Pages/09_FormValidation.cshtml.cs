@@ -13,7 +13,7 @@ namespace Exercises.Pages
         public string? Name { get; init; } = string.Empty;
 
         [BindProperty, Required]
-        public int Age { get; init; }
+        public int? Age { get; init; } = null!;
 
         public async Task<IActionResult> OnPost()
         {
