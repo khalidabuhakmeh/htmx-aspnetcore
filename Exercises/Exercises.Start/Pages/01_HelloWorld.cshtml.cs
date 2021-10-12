@@ -9,7 +9,8 @@ namespace Exercises.Pages
         public IActionResult OnGet()
         {
             return Request.IsHtmx()
-                ? Content("<span>Hello, World!</span>", "text/html")
+                // Todo: <span>Hello, World!</span>
+                ? Content("", "text/html")
                 : Page();
         }
     }

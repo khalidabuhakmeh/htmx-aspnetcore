@@ -31,11 +31,13 @@
         <span class="input-group-text" id="search-addon">
             <img id="search-icon" src="~/img/search.svg" alt="search" width="16"/>
         </span>
+        
         <input type="text"
                asp-for="Query"
                id="query"
                autocomplete="off"
                placeholder="Search"
+               @* todo: Add four htmx attribute: hx-get, hx-target, hx-trigger, hx-indicator *@
                class="form-control"
                aria-label="Username"
                aria-describedby="search-addon">

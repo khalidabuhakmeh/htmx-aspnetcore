@@ -51,7 +51,7 @@ namespace Exercises.Pages
             if (Cuisine is { Length: > 0 } cuisine && cuisines.TryGetValue(cuisine, out var foods))
             {
                 html.AppendLine("<option disabled selected>Select a food</option>");
-                foreach (var food in cuisines[Cuisine!]) 
+                foreach (var food in foods) 
                 {
                     html.AppendLine($"<option>{food}</option>");
                 }    

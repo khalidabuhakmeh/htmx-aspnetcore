@@ -1,15 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Threading;
-using System.Threading.Tasks;
 using Lib.AspNetCore.ServerSentEvents;
-using Microsoft.Extensions.Hosting;
 
 namespace Exercises.Models
 {
-    public class ServerEventsWorker : IHostedService
+    public class ServerEventsWorker : BackgroundService
     {
         private readonly IServerSentEventsService client;
 
@@ -18,11 +12,11 @@ namespace Exercises.Models
             this.client = client;
         }
 
-        public async Task StartAsync(CancellationToken cancellationToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             try
             {
-                while (!cancellationToken.IsCancellationRequested)
+                while (!stoppingToken.IsCancellationRequested)
                 {
                     var clients = client.GetClients();
                     if (clients.Any())
@@ -38,22 +32,17 @@ namespace Exercises.Models
                                     Number.Value.ToString()
                                 }
                             },
-                            cancellationToken
+                            stoppingToken
                         );
                     }
 
-                    await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
+                    await Task.Delay(TimeSpan.FromSeconds(1), stoppingToken);
                 }
             }
             catch (TaskCanceledException)
             {
                 // this exception is expected
             }
-        }
-
-        public Task StopAsync(CancellationToken cancellationToken)
-        {
-            return Task.CompletedTask;
         }
     }
 

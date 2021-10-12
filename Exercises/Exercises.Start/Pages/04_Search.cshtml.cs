@@ -12,7 +12,7 @@ namespace Exercises.Pages
 {
     public class Search : PageModel
     {
-        private static List<Game> Games = new()
+        private static readonly List<Game> Games = new()
         {
             new (1993, "Super Mario Bros. 3", "Nintendo", "NES"),
             new (1992, "The Legend of Zelda: A Link To The Past", "Nintendo", "SNES"),

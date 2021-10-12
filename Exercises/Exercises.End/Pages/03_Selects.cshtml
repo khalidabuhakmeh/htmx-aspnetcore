@@ -25,7 +25,6 @@
                 asp-items="Model.CuisineItems" 
                 class="form-control"
                 hx-get="@Url.Page("03_Selects", "Foods")"
-                hx-swap="innerHTML"
                 hx-target="#foods">
         </select>
     </div>
@@ -33,8 +32,7 @@
         <label>Select a Food</label>
         <select asp-for="Food" class="form-control" id="foods"
                 hx-get="@Url.Page("03_Selects", "Love")"
-                hx-target="#love"
-                hx-swap="innerHTML">
+                hx-target="#love">
             <option disabled selected value="">Pick a Cuisine First</option>
         </select>
     </div>
