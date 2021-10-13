@@ -10,6 +10,19 @@
                     @tab
                 </a>
             </li>
+            
+            @* TODO: alter above anchor with HTMX attributes and ASP.NET Core helpers
+            <!-- href is required or anchor won't be clickable -->
+            <a
+                href="#"
+                hx-get="@Url.Page("07_Tabs", new {tab})"
+                hx-target="#tabbed-content"
+                class="nav-link @Model.IsSelectedCss(tab, "active")"
+                aria-current="@Model.IsSelectedCss(tab, "page")">
+                @tab
+            </a>
+            *@
+            
         }
     </ul>
 

@@ -6,11 +6,13 @@
         @foreach (var tab in Model.Items)
         {
             <li class="nav-item">
-                <a hx-get="@Url.Page("07_Tabs", new {tab})"
-                   href="#"
-                   class="nav-link @Model.IsSelectedCss(tab, "active")"
-                   aria-current="@Model.IsSelectedCss(tab, "page")"
-                   hx-target="#tabbed-content">
+                <!-- href is required or anchor won't be clickable -->
+                <a
+                    href="#"
+                    hx-get="@Url.Page("07_Tabs", new {tab})"
+                    hx-target="#tabbed-content"
+                    class="nav-link @Model.IsSelectedCss(tab, "active")"
+                    aria-current="@Model.IsSelectedCss(tab, "page")">
                     @tab
                 </a>
             </li>
@@ -21,12 +23,12 @@
         <div class="tab-pane show active p-1 mt-3" role="tabpanel">
             <h2>@Model.Tab</h2>
             <hr>
-            <img alt="random image" 
+            <img alt="random image"
                  class="rounded float-end m-2 mt-1 easeload"
                  width="200"
                  height="200"
                  onload="this.style.opacity = 1;"
-                 src="https://picsum.photos/200/200?cache=@DateTime.Now.Ticks" />
+                 src="https://picsum.photos/200/200?cache=@DateTime.Now.Ticks"/>
             <p>
                 Commodo normcore truffaut VHS duis gluten-free keffiyeh iPhone taxidermy godard ramps anim pour-over.
                 Pitchfork vegan mollit umami quinoa aute aliquip kinfolk eiusmod live-edge cardigan ipsum locavore.

@@ -3,6 +3,7 @@
 
 @if (Model.RenderCartOutOfBand)
 {
+    @* TODO: Note the use of hx-swap-oob and id attributes *@
     <a id="cartNavbar" hx-swap-oob="true" class="nav-link ms-10" aria-current="page" href="#">
         <i class="fa fa-shopping-cart"></i>
         Cart
@@ -19,6 +20,15 @@
             <h5>Pineapple Green Packham</h5> <span>Each - approx 1.2KG</span>
         </div>
         <div class="bottom d-flex flex-row justify-content-center">
+            @* TODO: Enhance the form below with HTMX attributes *@
+            @* 
+            <form 
+                hx-post 
+                hx-page="14_OutOfBand" 
+                hx-page-handler="AddToCart" 
+                hx-swap="outerHTML" 
+                hx-target="#shoppingItem"> 
+            *@
             <form>
                 <div class="input-group mb-3">
                     <input id="count" type="number" min="0" max="100" class="form-control" name="count" value="@Model.TotalItemsInCart">

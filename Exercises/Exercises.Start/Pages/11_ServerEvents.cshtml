@@ -22,13 +22,32 @@
 </markdown>
 
 <div class="d-flex justify-content-center">
+    @* TODO: add hx-sse="connect:/rn-updates" to following <div> *@
     <div class="card mb-3 text-center" style="max-width: 18rem;">
         <div class="card-header bg-primary text-white">Featured Random Number</div>
         <div class="card-body">
             <h5 class="card-title">The Random Number is..</h5>
+            @* TODO: Add hx-trigger="sse:number" and hx-get="@Url.Page("11_ServerEvents", "Random")" to following <div> *@
             <p class="card-text fa-4x">
                 <span>@Number.Value</span>
             </p>
         </div>
     </div>
 </div>
+
+@* Complete Solution *@
+@*
+<div class="d-flex justify-content-center">
+    <div hx-sse="connect:/rn-updates" class="card mb-3 text-center" style="max-width: 18rem;">
+        <div class="card-header bg-primary text-white">Featured Random Number</div>
+        <div class="card-body">
+            <h5 class="card-title">The Random Number is..</h5>
+            <p class="card-text fa-4x"
+               hx-trigger="sse:number"
+               hx-get="@Url.Page("11_ServerEvents", "Random")">
+                <span>@Number.Value</span>
+            </p>
+        </div>
+    </div>
+</div>
+*@

@@ -19,6 +19,9 @@ namespace Exercises.Pages
         public bool IsSelected(string name) => 
             name.Equals(Tab?.Trim(), StringComparison.OrdinalIgnoreCase);
 
+        public string? IsSelectedCss(string tab, string? cssClass)
+            => IsSelected(tab) ? cssClass : null;
+
         public IActionResult OnGet()
         {
             // make sure we have a tab
@@ -28,8 +31,5 @@ namespace Exercises.Pages
                 ? Partial("_Tabs", this)
                 : Page();
         }
-
-        public string? IsSelectedCss(string tab, string? cssClass)
-            => IsSelected(tab) ? cssClass : null;
     }
 }

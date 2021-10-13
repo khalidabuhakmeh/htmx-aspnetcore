@@ -17,6 +17,15 @@
     ---
 </markdown>
 
+@* TODO: Apply HTMX attributes to following <div> *@
 <div class="container">
     @await Html.PartialAsync("_Stonks")
 </div>
+
+@* TODO: Solution *@
+@*
+<div class="container"
+     hx-get="@Url.Page("10_Polling")"
+     hx-trigger="every 2s"
+     hx-swap="innerHtml">
+*@
