@@ -24,11 +24,13 @@
         <h2>Fancy Newsletter Signup</h2>
     </div>
     <div class="card-body">
-        <form id="newsletter"
-            @* hx-post="@Url.Page("06_Modal", "Modal")" *@
-            @* hx-target="#modals-here" *@
-            @* hx-trigger="submit" *@
-            >
+        @* TODO: Add the following attributes to <form> *@
+        @*
+         hx-post="@Url.Page("06_Modal", "Modal")"
+         hx-target="#modals-here"
+         hx-trigger="submit" 
+        *@
+        <form id="newsletter">
             <div class="form-floating mb-3">
                 <input type="email"
                        name="email"

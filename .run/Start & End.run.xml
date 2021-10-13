@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Start &amp; End" type="CompoundRunConfigurationType">
+    <toRun name="Exercises.End" type="LaunchSettings" />
+    <toRun name="Exercises.Start" type="LaunchSettings" />
+    <method v="2" />
+  </configuration>
+</component>
