@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Htmx" Version="0.0.10" />
+      <PackageReference Include="Htmx" Version="0.0.12" />
       <PackageReference Include="Htmx.TagHelpers" Version="0.0.12" />
       <PackageReference Include="Lib.AspNetCore.ServerSentEvents" Version="6.0.0" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.0-rc.2.21421.2" />
@@ -18,6 +18,10 @@
     <ItemGroup>
       <Folder Include="wwwroot\img" />
       <Folder Include="wwwroot\js\extra" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Watch Include="**\*.cshtml"  />
     </ItemGroup>
 
 </Project>
