@@ -9,7 +9,6 @@ namespace Exercises.Pages
         public IActionResult OnGet()
         {
             return Request.IsHtmx()
-                
                 ? Content(
                     // language=html
                     "<span>Hello, World!</span>", "text/html"
