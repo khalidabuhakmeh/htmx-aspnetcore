@@ -13,6 +13,7 @@ builder.Services.AddRazorPages(o => {
 }).AddRazorRuntimeCompilation();
 
 // dependencies for server sent events
+// Lib.AspNetCore.ServerSentEvents
 builder.Services.AddServerSentEvents();
 builder.Services.AddHostedService<ServerEventsWorker>();
 

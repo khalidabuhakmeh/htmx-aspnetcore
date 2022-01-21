@@ -11,8 +11,8 @@
     <ItemGroup>
       <PackageReference Include="Htmx" Version="0.0.12" />
       <PackageReference Include="Htmx.TagHelpers" Version="0.0.12" />
-      <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.0-preview.7.21378.6" />
-      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.0-preview.7.21413.1" />
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.1" />
+      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
     </ItemGroup>
 
     <ItemGroup>
