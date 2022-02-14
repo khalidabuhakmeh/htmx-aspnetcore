@@ -2,9 +2,8 @@
 @{
     System.Diagnostics.Debug.Assert(Model != null, nameof(Model) + " != null");
     var id = $"shopItem-{Model.Info.Id}";
-    var oob = Model.ShouldRenderCartButton ? "true" : null;
 }
-<div id="@id" class="col mb-5" hx-swap-oob="@oob">
+<div id="@id" class="col mb-5" hx-swap-oob="true">
     <div class="card h-100">
         @if (Model.IsOnSale)
         {
