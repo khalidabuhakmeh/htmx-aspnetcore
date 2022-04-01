@@ -10,6 +10,7 @@ public class ProductViewModel
     public bool IsOnSale => Info.DiscountPrice.HasValue;
     public bool HasOptions => Info.Options.Any();
     public bool ShouldRenderCartButton { get; set; }
+    public bool Swap { get; set; }
 
     public HtmlString PriceDisplay
     {

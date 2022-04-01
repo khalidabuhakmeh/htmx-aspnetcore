@@ -41,7 +41,8 @@ public class CartController : Controller
                 Info = product!,
                 ProductOptionId = option.Id,
                 ShouldRenderCartButton = true,
-                InstantlyShowModal = true
+                InstantlyShowModal = true,
+                Swap = true
             });
         }
 
@@ -49,7 +50,8 @@ public class CartController : Controller
         return PartialView("_Product", new ProductViewModel
         {
             Info = product!,
-            ShouldRenderCartButton = true
+            ShouldRenderCartButton = true,
+            Swap = true
         });
     }
 

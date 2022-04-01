@@ -31,6 +31,7 @@ public class ProductsController : Controller
         // set a default selected option if one isn't provided
         product.ProductOptionId ??= product.Info.Options.Select(o => o.Id).FirstOrDefault();
         product.InstantlyShowModal = showModal.HasValue && showModal.Value;
+        product.Swap = true;
         
         return PartialView("_ProductOptions", product);
     }

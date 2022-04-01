@@ -3,7 +3,9 @@
     System.Diagnostics.Debug.Assert(Model != null, nameof(Model) + " != null");
     var id = $"shopItem-{Model.Info.Id}";
 }
-<div id="@id" class="col mb-5" hx-swap-oob="true">
+<div id="@id" class="col mb-5" 
+     @if (Model.Swap) { <text> hx-swap-oob="true" </text> }
+>
     <div class="card h-100">
         @if (Model.IsOnSale)
         {
