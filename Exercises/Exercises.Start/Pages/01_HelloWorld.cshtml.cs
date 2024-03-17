@@ -10,7 +10,7 @@ namespace Exercises.Pages
         {
             return Request.IsHtmx()
                 // Todo: <span>Hello, World!</span>
-                ? Content("", "text/html")
+                ? Content("<span>Hello, World!</span>", "text/html")
                 : Page();
         }
     }
