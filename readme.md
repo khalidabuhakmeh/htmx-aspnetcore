@@ -42,8 +42,8 @@ This is a real-world sample, taking a working ASP.NET Core application and enhan
 
 ## Videos
 
-TODO - Link To Videos
+[Link to Videos](https://www.jetbrains.com/guide/dotnet/tutorials/htmx-aspnetcore/)
 
 ## License
 
-TBD. 
+MIT License
