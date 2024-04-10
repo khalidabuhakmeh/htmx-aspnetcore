@@ -75,7 +75,8 @@ public class CartController : Controller
         var model = new ProductViewModel
         {
             Info = product!,
-            ShouldRenderCartButton = true
+            ShouldRenderCartButton = true,
+            Swap = true
         };
 
         return PartialView("_CartItems", model);
